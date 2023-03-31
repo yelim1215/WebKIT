@@ -23,6 +23,15 @@ class App extends React.Component {
     this.setState({items: thisItems}); // update state
     console.log("items: ", this.state.items);
   }
+  // (3) delete 함수 추가 (alt + shift + f 포맷팅)
+  delete = (item) => {
+    const thisItems = this.state.items;
+    const newItems = thisItems.filter(e => e.id !== item.id);
+    this.setState({items: newItems}, () => {
+      // 디버깅 콜백
+      console.log("Update Itmes : ", this.state.items)
+    });
+  }
 
   render(){
     // todoItems에 this.state.items.length 가 0보다 크다면 true 이므로 && 뒤에 값을 넘겨준다.
@@ -31,7 +40,7 @@ class App extends React.Component {
       <Paper style = {{margin: 16}}>
         <List>
           {this.state.items.map((item, idx) => (
-            <Todo item = {item} key = {item.id} />
+            <Todo item = {item} key = {item.id} delete = {this.delete} />
           ))}
         </List>
       </Paper>
