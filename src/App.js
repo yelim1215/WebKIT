@@ -14,7 +14,7 @@ class App extends React.Component {
   }
   // (1) add 함수 추가
   add = (item) => {
-    call("/todo", "POST", item).them((response) =>
+    call("/todo", "POST", item).then((response) =>
     this.setState({items: response.data})
     );
   }
@@ -32,7 +32,7 @@ class App extends React.Component {
     );
   }
 
-  conponentDidMount() {
+  componentDidMount() {
     call("/todo", "GET", null).then((response) =>
     this.setState({items: response.data})
     );
