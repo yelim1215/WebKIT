@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
+import DeleteTodo from './DeleteTodo';
 import {Paper, List, Container, Grid, Button, AppBar, Toolbar, Typography} from "@material-ui/core";
 import './App.css';
 import { call, signout } from './service/ApiService';
@@ -12,7 +13,6 @@ class App extends React.Component {
       items : [],
       /* 로딩 중이라는 상태를 표현할 변수 생성자에 상태 변수를 초기화한다.*/
       loading:true,
-
     };
   }
   // add 함수 추가
@@ -32,6 +32,18 @@ class App extends React.Component {
     call("/todo","PUT",item).then((response) =>
       this.setState({items:response.data})
     );    
+  }
+
+  deleteForCompleted = () => {
+    const thisItems = this.state.items;
+    console.log("Before deleteForCompleted Items : ", this.state.items);
+    thisItems.map((e) => {
+      if (e.done === true) {
+        call("/todo", "DELETE", e).then((response) =>
+          this.setState( { items: response.data })
+        );
+      }
+    });
   }
 
   // componentDidmount는 페이지(돔) 마운트가 일어나고 렌더링 되기 전에 실행된다.
@@ -66,8 +78,6 @@ class App extends React.Component {
             <Grid item>
               <Button color="inherit" onClick={signout}>logout
               </Button>
-              <Button color="inherit"><a href="/userpage">mypage</a>
-              </Button>
             </Grid>
 
           </Grid>
@@ -84,6 +94,7 @@ class App extends React.Component {
         <AddTodo add={this.add} />
         <div className="TodoList">{todoItems}</div>
       </Container>
+      <DeleteTodo deleteForCompleted={this.deleteForCompleted} />
       </div>
     );
     
