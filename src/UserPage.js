@@ -1,4 +1,5 @@
 import React from "react";
+import { userupdate } from "./service/ApiService";
 import {
     Button,
     TextField,
@@ -7,8 +8,6 @@ import {
     Container,
     Typography,
 } from "@material-ui/core";
-
-import { userupdate } from "./service/ApiService";
 
 class UserPage extends React.Component {
     constructor(props) {
@@ -20,19 +19,64 @@ class UserPage extends React.Component {
         event.preventDefault();
 
         const data = new FormData(event.target);
-        const username = data.get("username");
-        const email = data.get("email");
-        const password = data.get("password");
-        userupdate({ email: email, username: username, password: password }).then(
-            (response) => {
-                window.location.href = "/login";
-            }
-        );
     }
 
     render() {
         return (
-            <p>회원정보 수정</p>
+            <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
+                <form noValidate onSubmit={this.handleSubmit}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Typography component="h1" variant="h5">
+                                회원정보 수정
+                            </Typography>
+                            <p></p>
+                            email은 수정이 불가합니다.
+                        </Grid>
+                        <Grid item xs={12}>
+                            사용자 이름
+                            <TextField
+                                autoComplete="username"
+                                name="username"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="username"
+                                autoFocus
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            패스워드
+                            <TextField
+                                autoComplete="current-password"
+                                name="password"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="password"
+                                autoFocus
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                            >
+                                회원정보 수정
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <Grid container justify="flex-end">
+                        <Grid item>
+                            <Link href="/login" variant="body2">
+                                수정을 중단하시겠습니까?
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </form>
+            </Container>
         );
     }
 }

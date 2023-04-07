@@ -2,9 +2,9 @@ import React from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
 import DeleteTodo from './DeleteTodo';
-import {Paper, List, Container, Grid, Button, AppBar, Toolbar, Typography} from "@material-ui/core";
+import {Paper, List, Container, Grid, Button, AppBar, Toolbar, Typography, Link} from "@material-ui/core";
 import './App.css';
-import { call, signout } from './service/ApiService';
+import { call, signout, userupdate } from './service/ApiService';
 
 // commit test
 
@@ -80,8 +80,9 @@ class App extends React.Component {
             <Grid item>
               <Button color="inherit" onClick={signout}>logout
               </Button>
+              <Button color="inherit" onClick={userupdate}>mypage
+              </Button>
             </Grid>
-
           </Grid>
         </Toolbar>
       </AppBar>
