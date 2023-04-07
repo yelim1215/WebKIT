@@ -66,6 +66,8 @@ class App extends React.Component {
             <Grid item>
               <Button color="inherit" onClick={signout}>logout
               </Button>
+              <Button color="inherit"><a href="/userpage">mypage</a>
+              </Button>
             </Grid>
 
           </Grid>

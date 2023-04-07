@@ -69,6 +69,24 @@ export function signup(userDTO) {
         return Promise.reject(error);
     });
 }
+// 회원정보 수정 요청 back: UserController
+export function userupdate(userDTO) {
+    return call("/auth/userupdate/${username}","GET", userDTO)
+    .then((response) => {
+        if(response.id) {
+            window.location.href="/login";
+        }
+    })
+    .catch((error) => {
+        console.log("Oops!");
+        console.log(error.status);
+        console.log("Ooops!")
+        if(error.status === 403) {
+           window.location.href = "/auth/userupdate";
+        }
+        return Promise.reject(error);
+    });
+}
 // 로그아웃
 export function signout() {
     // local 스토리지에 토큰 삭제
