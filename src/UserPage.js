@@ -62,17 +62,12 @@ class UserPage extends React.Component {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                color="primary"
+                                color="white"
                             >
-                                회원정보 수정
+                                <Link href="/login">
+                                    회원정보 수정 완료
+                                </Link>
                             </Button>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="/login" variant="body2">
-                                수정을 중단하시겠습니까?
-                            </Link>
                         </Grid>
                     </Grid>
                 </form>
